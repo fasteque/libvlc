@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
 	<attr path="/api/package[@name='org.videolan']" name="managedName">VideoLAN</attr>
-	<attr path="/api/package[@name='org.videolan.libvlc']" name="managedName">VideoLAN.LibVLC</attr>
-	<attr path="/api/package[@name='org.videolan.libvlc.media']" name="managedName">VideoLAN.LibVLC.Media</attr>
-	<attr path="/api/package[@name='org.videolan.libvlc.util']" name="managedName">VideoLAN.LibVLC.Util</attr>
+	<attr path="/api/package[@name='org.videolan.libvlc']" name="managedName">VideoLAN</attr>
+	<attr path="/api/package[@name='org.videolan.libvlc.media']" name="managedName">VideoLAN.Media</attr>
+	<attr path="/api/package[@name='org.videolan.libvlc.util']" name="managedName">VideoLAN.Utils</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaList']/method[@name='onReleaseNative']" name="visibility">protected</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='Media']/method[@name='getType' and count(parameter)=0]" name="managedName">GetMediaType</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='Media.Track.Type']" name="managedName">TrackType</attr>
+	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaPlayer']" name="managedName">InternalMediaPlayer</attr>
+	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaPlayer.Event']" name="visibility">public</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaPlayer.Event']/method[@name='getPositionChanged' and count(parameter)=0]" name="managedName">EventPositionChanged</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaPlayer.Event']/method[@name='getTimeChanged' and count(parameter)=0]" name="managedName">EventTimeChanged</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='MediaPlayer.Event']/method[@name='getBuffering' and count(parameter)=0]" name="managedName">EventBuffering</attr>
-	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='LibVLC']" name="managedName">LibVLC</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='Media']" name="managedName">VLCMedia</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='VLCObject']" name="visibility">public</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='VLCEvent']" name="visibility">public</attr>

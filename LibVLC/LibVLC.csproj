@@ -6,7 +6,7 @@
     <ProjectGuid>{EC1CF053-7B3D-4C5A-B680-F75B4F9B2A78}</ProjectGuid>
     <ProjectTypeGuids>{10368E6C-D01B-4462-8E8B-01FC667A7035};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>libvlc</RootNamespace>
+    <RootNamespace>LibVLC</RootNamespace>
     <AssemblyName>libvlc</AssemblyName>
     <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
