@@ -3,31 +3,30 @@ using Android.OS;
 using Org.Videolan.Libvlc;
 using Android.Views;
 using Android.Util;
+using System;
 
 namespace libvlcTest
 {
 	[Activity (Label = "libvlcTest", MainLauncher = true, Icon = "@mipmap/icon")]
-	public class MainActivity : Activity, IMediaPlayerEventCallback
+	public class MainActivity : Activity
 	{
 		const string TAG = "libVLCTest";
 
 		MonoLibVLC libVLC;
-		MediaPlayer mediaPlayer;
+		VlcMediaPlayer mediaPlayer;
 		SurfaceView surfaceView;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
-
-			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
 			surfaceView = FindViewById<SurfaceView> (Resource.Id.surfaceView);
 
 			if (libVLC == null) {
 				libVLC = new MonoLibVLC ();
-				mediaPlayer = new MediaPlayer (libVLC);
-				mediaPlayer.SetMediaPlayerEventCallback (this);
+				mediaPlayer = new VlcMediaPlayer (libVLC);
+				setMediaPlaeryEvents ();
 			}
 
 			IVLCVout vout = mediaPlayer.VLCVout;
@@ -40,58 +39,116 @@ namespace libvlcTest
 			mediaPlayer.Play ();
 		}
 
-		public void OnMediaPlayerEvent (int p0)
+		protected override void OnDestroy ()
 		{
-			switch (p0) {
-			case MediaPlayer.Event.Buffering:
-				Log.Debug (TAG, "Media player: Buffering");
-				break;
-			case MediaPlayer.Event.ESAdded:
-				Log.Debug (TAG, "Media player: ESAdded");
-				break;
-			case MediaPlayer.Event.ESDeleted:
-				Log.Debug (TAG, "Media player: ESDeleted");
-				break;
-			case MediaPlayer.Event.EncounteredError:
-				Log.Debug (TAG, "Media player: EncounteredError");
-				break;
-			case MediaPlayer.Event.EndReached:
-				Log.Debug (TAG, "Media player: EndReached");
-				break;
-			case MediaPlayer.Event.MediaChanged:
-				Log.Debug (TAG, "Media player: MediaChanged");
-				break;
-			case MediaPlayer.Event.Opening:
-				Log.Debug (TAG, "Media player: Opening");
-				break;
-			case MediaPlayer.Event.PausableChanged:
-				Log.Debug (TAG, "Media player: PausableChanged");
-				break;
-			case MediaPlayer.Event.Paused:
-				Log.Debug (TAG, "Media player: Paused");
-				break;
-			case MediaPlayer.Event.Playing:
-				Log.Debug (TAG, "Media player: Playing");
-				break;
-			case MediaPlayer.Event.PositionChanged:
-				Log.Debug (TAG, "Media player: PositionChanged");
-				break;
-			case MediaPlayer.Event.SeekableChanged:
-				Log.Debug (TAG, "Media player: SeekableChanged");
-				break;
-			case MediaPlayer.Event.Stopped:
-				Log.Debug (TAG, "Media player: Stopped");
-				break;
-			case MediaPlayer.Event.TimeChanged:
-				Log.Debug (TAG, "Media player: TimeChanged");
-				break;
-			case MediaPlayer.Event.Vout:
-				Log.Debug (TAG, "Media player: Vout");
-				break;
-			default:
-				Log.Debug (TAG, "Media player: unknown event " + p0);
-				break;
+			base.OnDestroy ();
+			releaseMediaPlayer ();
+		}
+
+		private void setMediaPlaeryEvents ()
+		{
+			mediaPlayer.MediaChanged += OnMediaPlayerMediaChanged;
+			mediaPlayer.Opening += OnMediaPlayerOpening;
+			mediaPlayer.Buffering += OnMediaPlayerBuffering;
+			mediaPlayer.Playing += OnMediaPlayerPlaying;
+			mediaPlayer.Paused += OnMediaPlayerPaused;
+			mediaPlayer.Stopped += OnMediaPlayerStopped;
+			mediaPlayer.EndReached += OnMediaPlayerEndReached;
+			mediaPlayer.EncouteredError += OnMediaPlayerEncouteredError;
+			mediaPlayer.TimeChanged += OnMediaPlayerTimeChanged;
+			mediaPlayer.PositionChanged += OnMediaPlayerPositionChanged;
+			mediaPlayer.SeekableChanged += OnMediaPlayerSeekableChanged;
+			mediaPlayer.PausableChanged += OnMediaPlayerPausableChanged;
+			mediaPlayer.ESAdded += OnMediaPlayerESAdded;
+			mediaPlayer.ESDeleted += OnMediaPlayerESDeleted;
+			mediaPlayer.Vout += OnMediaPlayerVout;
+		}
+
+		void releaseMediaPlayer ()
+		{
+			if (libVLC == null)
+				return;
+
+			if (mediaPlayer != null) {
+				mediaPlayer.Stop ();
+				IVLCVout vout = mediaPlayer.VLCVout;
+				vout.DetachViews ();
+				libVLC.Release ();
+				libVLC = null;
 			}
+		}
+
+		private void OnMediaPlayerMediaChanged (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: MediaChanged");
+		}
+
+		private void OnMediaPlayerOpening (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Opening");
+		}
+
+		private void OnMediaPlayerBuffering (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Buffering");
+		}
+
+		private void OnMediaPlayerPlaying (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Playing");
+		}
+
+		private void OnMediaPlayerPaused (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Paused");
+		}
+
+		private void OnMediaPlayerStopped (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Stopped");
+		}
+		private void OnMediaPlayerEndReached (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: EndReached");
+		}
+		private void OnMediaPlayerEncouteredError (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: EncounteredError");
+		}
+
+		private void OnMediaPlayerTimeChanged (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: TimeChanged");
+		}
+
+		private void OnMediaPlayerPositionChanged (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: PositionChanged");
+		}
+
+		private void OnMediaPlayerSeekableChanged (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: SeekableChanged");
+		}
+
+		private void OnMediaPlayerPausableChanged (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: PausableChanged");
+		}
+
+		private void OnMediaPlayerESAdded (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: ESAdded");
+		}
+
+		private void OnMediaPlayerESDeleted (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: ESDeleted");
+		}
+
+		private void OnMediaPlayerVout (object sender, EventArgs args)
+		{
+			Log.Debug (TAG, "Media player: Vout");
 		}
 	}
 }
