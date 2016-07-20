@@ -1,6 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
-using Org.Videolan.Libvlc;
+using VideoLAN.LibVLC;
 using Android.Views;
 using Android.Util;
 using System;

@@ -1,5 +1,6 @@
 ﻿using System;
-using Org.Videolan.Libvlc;
+using VideoLAN.LibVLC;
+
 namespace libvlcTest
 {
 	public class VlcMediaPlayer : MediaPlayer
