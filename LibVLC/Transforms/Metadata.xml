@@ -17,4 +17,6 @@
 	<attr path="/api/package[@name='org.videolan.libvlc']/class[@name='VLCEvent']" name="visibility">public</attr>
 	<attr path="/api/package[@name='org.videolan.libvlc']/interface[@name='VLCEvent.Listener']" name="managedName">IListenerSupport</attr>
 	<remove-node path="/api/package[@name='org.videolan.libvlc']/class[@name='Dialog']" />
+	<remove-node path="/api/package[@name='org.videolan.libvlc.media']/class[@name='MediaPlayer']" />
+	<remove-node path="/api/package[@name='org.videolan.libvlc.media']/class[@name='VideoView']" />
 </metadata>
