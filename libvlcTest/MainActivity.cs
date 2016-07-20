@@ -107,10 +107,12 @@ namespace libvlcTest
 		{
 			Log.Debug (TAG, "Media player: Stopped");
 		}
+
 		private void OnMediaPlayerEndReached (object sender, EventArgs args)
 		{
 			Log.Debug (TAG, "Media player: EndReached");
 		}
+
 		private void OnMediaPlayerEncouteredError (object sender, EventArgs args)
 		{
 			Log.Debug (TAG, "Media player: EncounteredError");
