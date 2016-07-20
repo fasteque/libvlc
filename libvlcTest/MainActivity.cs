@@ -26,7 +26,7 @@ namespace libvlcTest
 			if (libVLC == null) {
 				libVLC = new MonoLibVLC ();
 				mediaPlayer = new VlcMediaPlayer (libVLC);
-				setMediaPlaeryEvents ();
+				setMediaPlayerEvents ();
 			}
 
 			IVLCVout vout = mediaPlayer.VLCVout;
@@ -45,7 +45,7 @@ namespace libvlcTest
 			releaseMediaPlayer ();
 		}
 
-		private void setMediaPlaeryEvents ()
+		private void setMediaPlayerEvents ()
 		{
 			mediaPlayer.MediaChanged += OnMediaPlayerMediaChanged;
 			mediaPlayer.Opening += OnMediaPlayerOpening;
